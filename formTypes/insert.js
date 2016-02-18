@@ -16,7 +16,9 @@ AutoForm.addFormType('insert', {
     // Run "before.insert" hooks
     this.runBeforeHooks(this.insertDoc, function (doc) {
       // Perform insert
-      model.create(doc, c.result);
+      model.create(doc)
+      .then(doc => c.result(null, doc.id))
+      .catch(doc => c.result(doc.errors));
     });
   },
   validateForm: function () {
@@ -27,6 +29,6 @@ AutoForm.addFormType('insert', {
   },
   shouldPrevalidate: function () {
     // Prevalidate only if there is both a `schema` attribute and a `model` attribute
-    return !!this.formAttributes.model && !!this.formAttributes.schema;
+    return true;
   }
 });

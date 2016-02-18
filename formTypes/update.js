@@ -7,10 +7,10 @@ AutoForm.addFormType('update', {
     // Prevent browser form submission
     this.event.preventDefault();
 
-    // Make sure we have a collection
-    var collection = this.collection;
-    if (!collection) {
-      throw new Error("AutoForm: You must specify a collection when form type is update.");
+    // Make sure we have a model
+    var model = this.model;
+    if (!model) {
+      throw new Error("AutoForm: You must specify a model when form type is update.");
     }
 
     // Run "before.update" hooks
@@ -20,7 +20,10 @@ AutoForm.addFormType('update', {
         c.result(null, 0);
       } else {
         // Perform update
-        collection.update({_id: c.docId}, modifier, c.validationOptions, c.result);
+        const doc = model.find({_id: c.docId});
+        doc.update(modifier.$set)
+        .then(doc => c.result(null, doc.id))
+        .catch(doc => c.result(doc.errors));
       }
     });
   },
@@ -33,6 +36,6 @@ AutoForm.addFormType('update', {
   },
   shouldPrevalidate: function () {
     // Prevalidate only if there is both a `schema` attribute and a `collection` attribute
-    return !!this.formAttributes.collection && !!this.formAttributes.schema;
+    return true;
   }
 });

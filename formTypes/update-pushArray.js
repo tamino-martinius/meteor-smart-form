@@ -8,9 +8,9 @@ AutoForm.addFormType('update-pushArray', {
     this.event.preventDefault();
 
     // Make sure we have a collection
-    var collection = this.collection;
-    if (!collection) {
-      throw new Error("AutoForm: You must specify a collection when form type is update-pushArray.");
+    var model = this.model;
+    if (!model) {
+      throw new Error("AutoForm: You must specify a model when form type is update-pushArray.");
     }
 
     // Make sure we have a scope
@@ -25,10 +25,13 @@ AutoForm.addFormType('update-pushArray', {
         // Nothing to update. Just treat it as a successful update.
         c.result(null, 0);
       } else {
-        var modifer = {$push: {}};
-        modifer.$push[scope] = doc;
+        var modifier = {$push: {}};
+        modifier.$push[scope] = doc;
         // Perform update
-        collection.update({_id: c.docId}, modifer, c.validationOptions, c.result);
+        const doc = model.find({_id: c.docId});
+        doc.update(modifier)
+        .then(doc => c.result(null, doc.id))
+        .catch(doc => c.result(doc.errors));
       }
     });
   },
