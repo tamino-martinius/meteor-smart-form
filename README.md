@@ -1,20 +1,16 @@
-[![Build Status](https://travis-ci.org/aldeed/meteor-autoform.svg)](https://travis-ci.org/aldeed/meteor-autoform)
+[![Build Status](https://travis-ci.org/tamino-martinius/meteor-smart-form.svg)](https://travis-ci.org/tamino-martinius/meteor-smart-form)
 
-AutoForm
+smart-form
 =========================
 
-AutoForm is a Meteor package that adds UI components and helpers to easily create basic forms with automatic insert and update events, and automatic reactive validation. This package requires and automatically installs the [simple-schema](https://github.com/aldeed/meteor-simple-schema) package. You can optionally use it with the [collection2](https://github.com/aldeed/meteor-collection2) package, which you have to add to your app yourself.
+smart-form is a Meteor package that adds UI components and helpers to easily create basic forms with automatic insert and update events, and automatic reactive validation. This package requires and automatically installs the [simple-schema](https://github.com/aldeed/meteor-simple-schema) package. You can optionally use it with the [smart-record](https://github.com/tamino-martinius/meteor-smart-record) package, which you have to add to your app yourself.
 
-## NOTE: AutoForm 5.0
+## NOTE: This is an fork of aldeed's [AutoForm](https://github.com/aldeed/meteor-autoform) package
 
-AutoForm 5.0 is now available and has many compatibility breaks, but also many fixes and improvements. This release includes a lot of internal refactoring, so it's a good idea to thoroughly test all your forms after updating to 5.0+. Be sure to check out the [change log](https://github.com/aldeed/meteor-autoform/blob/master/CHANGELOG.md) for full details.
-
-**Add-on Package Authors**: Please test your package against AutoForm 5.0, and then release an update in which you change your `api.use` to `api.use('aldeed:autoform@4.0.0 || 5.0.0');`
+This package provides the same faetures as the AutoForm package, but it could be used with the smart-record package instead of [collection2](https://github.com/aldeed/meteor-collection2) package. Be sure to check out the [change log](https://github.com/tamino-martinius/meteor-smart-form/blob/master/CHANGELOG.md) for full details.
 
 ## Table of Contents
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+**Table of Contents**
 
 - [Installation](#installation)
   - [Community Add-On Packages](#community-add-on-packages)
@@ -71,7 +67,7 @@ AutoForm 5.0 is now available and has many compatibility breaks, but also many f
   - [Creating a Custom Template](#creating-a-custom-template)
 - [Defining Custom Input Types](#defining-custom-input-types)
 - [Common Questions](#common-questions)
-  - [Should the value of `schema` and `collection` have quotation marks around it?](#should-the-value-of-schema-and-collection-have-quotation-marks-around-it)
+  - [Should the value of `schema` and `model` have quotation marks around it?](#should-the-value-of-schema-and-model-have-quotation-marks-around-it)
   - [Which components should I use?](#which-components-should-i-use)
   - [Can I reuse the same `quickForm` or `autoForm` for both inserts and updates?](#can-i-reuse-the-same-quickform-or-autoform-for-both-inserts-and-updates)
   - [How can I show an asterisk after the label for required fields?](#how-can-i-show-an-asterisk-after-the-label-for-required-fields)
@@ -85,14 +81,12 @@ AutoForm 5.0 is now available and has many compatibility breaks, but also many f
 - [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## Installation
 
 In a Meteor app directory, enter:
 
 ```
-$ meteor add aldeed:autoform
+$ meteor add zaku:smart-form
 ```
 
 ### Community Add-On Packages
@@ -160,6 +154,7 @@ Payments
 
 Other:
 
+* [aldeed:delete-button](https://github.com/aldeed/meteor-delete-button)
 * [comerc:autoform-contenteditable2](https://atmospherejs.com/comerc/autoform-contenteditable2)
 * [hausor:autoform-bs-minicolors](https://atmospherejs.com/hausor/autoform-bs-minicolors)
 
@@ -196,46 +191,48 @@ Other:
 
 ## Demo
 
-[Live](http://autoform.meteor.com)
+[Live](http://smartform.meteor.com)
 
-[Source](https://github.com/aldeed/autoform-demo)
+[Source](https://github.com/tamino-martinius/meteor-smart-record)
 
 ## Example
 
-Let's say you have the following Mongo.Collection instance, with schema support
-provided by the collection2 package. (Adding `autoform` to your app does not add
-`collection2` by default so you need to run `meteor add aldeed:collection2` for this example
-to work.)
+Let's say you have the following SmartModel instance, with schema
+provided by the smart-record package. (Adding `smart-form` to your app does not add
+`smart-record` by default so you need to run `meteor add zaku:smart-record` for this example to work.)
 
 ```js
-Books = new Mongo.Collection("books");
-Books.attachSchema(new SimpleSchema({
-  title: {
-    type: String,
-    label: "Title",
-    max: 200
-  },
-  author: {
-    type: String,
-    label: "Author"
-  },
-  copies: {
-    type: Number,
-    label: "Number of copies",
-    min: 0
-  },
-  lastCheckedOut: {
-    type: Date,
-    label: "Last date this book was checked out",
-    optional: true
-  },
-  summary: {
-    type: String,
-    label: "Brief summary",
-    optional: true,
-    max: 1000
+Books = class Books estends SmartModel {
+  static schema() {
+    return {
+      title: {
+        type: String,
+        label: "Title",
+        max: 200
+      },
+      author: {
+        type: String,
+        label: "Author"
+      },
+      copies: {
+        type: Number,
+        label: "Number of copies",
+        min: 0
+      },
+      lastCheckedOut: {
+        type: Date,
+        label: "Last date this book was checked out",
+        optional: true
+      },
+      summary: {
+        type: String,
+        label: "Brief summary",
+        optional: true,
+        max: 1000
+      }
+    };
   }
-}));
+};
 ```
 
 *Be sure to define proper insert security for untrusted code if you've removed the `insecure` package. Call allow/deny or use [ongoworks:security](https://atmospherejs.com/ongoworks/security).*
@@ -244,17 +241,17 @@ Books.attachSchema(new SimpleSchema({
 
 ```html
 <template name="insertBookForm">
-  {{> quickForm collection="Books" id="insertBookForm" type="insert"}}
+  {{> quickForm model="Books" id="insertBookForm" type="insert"}}
 </template>
 ```
 
 That's it! This gives you:
 
 * An autogenerated form that uses bootstrap3 classes.
-* Appropriate HTML5 fields for all keys in the "Books" collection schema.
+* Appropriate HTML5 fields for all keys in the "Books" model schema.
 * A submit button that gathers the entered values and inserts them into
-the "Books" collection.
-* Form validation based on the schema attached to the "Books" collection. By default the form
+the "Books" model.
+* Form validation based on the schema attached to the "Books" model. By default the form
 is validated when the user submits. If anything is invalid, the form is
 continually re-validated on keyup (throttled) as the user fixes the issues.
 * Default validation error messages that appear under the fields, and can be
@@ -267,7 +264,7 @@ document with the original values to be updated:
 
 ```html
 <template name="updateBookForm">
-  {{> quickForm collection="Books" doc=this id="updateBookForm" type="update"}}
+  {{> quickForm model="Books" doc=this id="updateBookForm" type="update"}}
 </template>
 ```
 
@@ -287,7 +284,7 @@ Here's an example:
 
 ```html
 <template name="insertBookForm">
-  {{#autoForm collection="Books" id="insertBookForm" type="insert"}}
+  {{#autoForm model="Books" id="insertBookForm" type="insert"}}
     <fieldset>
       <legend>Add a Book</legend>
       {{> afQuickField name='title'}}
@@ -319,7 +316,7 @@ Here's an example:
 
 ```html
 <template name="insertBookForm">
-  {{#autoForm collection="Books" id="insertBookForm" type="insert"}}
+  {{#autoForm model="Books" id="insertBookForm" type="insert"}}
   <fieldset>
     <legend>Add a Book</legend>
     {{> afQuickField name='title'}}
@@ -348,25 +345,23 @@ group with add-ons.
 
 ## Component and Helper Reference
 
-NOTE: The `afDeleteButton` component that used to be part of autoform is now available as [a separate package](https://github.com/aldeed/meteor-delete-button).
-
 ### autoForm
 
 Use this component as a block instead of `<form>` elements to wrap your form and
-gain all the advantages of the autoform package.
+gain all the advantages of the smart-form package.
 
 The following attributes are recognized:
 
-* `collection`: Required if `schema` is not set. Set to one of the following:
+* `model`: Required if `schema` is not set. Set to one of the following:
     * The name of a helper function (no quotation marks) that returns an
-instance of `Mongo.Collection` that has a schema defined.
-    * The name (in quotation marks) of a `Mongo.Collection` instance that has
+instance of `SmartModel` that has a schema defined.
+    * The name (in quotation marks) of a `SmartModel` instance that has
 a schema defined and is in the `window` namespace.
-* `schema`: Required if `collection` is not set. This schema will be used to generate
+* `schema`: Required if `model` is not set. This schema will be used to generate
 and validate the form prior to submission, so you can specify this along with a
-`collection` if you want to use a schema that is slightly different from
-the one your collection uses. However, the final object will still have to pass
-validation against the collection schema. Set to one of the following:
+`model` if you want to use a schema that is slightly different from
+the one your model uses. However, the final object will still have to pass
+validation against the model schema. Set to one of the following:
     * The name of a helper function (no quotation marks) that returns an
 instance of `SimpleSchema`.
     * The name (in quotation marks) of a `SimpleSchema` instance that is in
@@ -416,7 +411,7 @@ fields listed here (and their subfields, if any) will be included.
 
 Any other attributes you specify will be output as attributes of the `<form>` element, just like when using the `autoForm` component. When providing a boolean attribute, set it to `true` (no quotation marks) or a helper that returns `true`.
 
-See [this demo](http://autoform.meteor.com/qfdetails) for examples of what happens when you specify various types of fields in the `fields` or `omitFields` attributes.
+See [this demo](http://smartform.meteor.com/qfdetails) for examples of what happens when you specify various types of fields in the `fields` or `omitFields` attributes.
 
 ### afFieldInput
 
@@ -528,7 +523,7 @@ Template.registerHelper("yearOptions", function() {
 });
 ```
 
-You can also mix in optgroups. See [the demo](http://autoform.meteor.com/select).
+You can also mix in optgroups. See [the demo](http://smartform.meteor.com/select).
 
 ### afFieldMessage
 
@@ -588,7 +583,7 @@ Refer to the "Objects and Arrays" section for additional information.
 
 Use this helper with `#if` to dynamically show and hide sections of a form based on the current value of any non-array field on the form.
 
-See [the demo](http://autoform.meteor.com/fieldvalues)
+See [the demo](http://smartform.meteor.com/fieldvalues)
 
 ### afFieldNames
 
@@ -686,17 +681,17 @@ Depending on the `type` attribute you specify on your `quickForm` or `autoForm`,
 
 ### insert
 
-Generates a document and inserts it on the client. You must provide a `collection` attribute referencing the `Mongo.Collection` instance. If the collection has an attached schema, it will be used for validation. If you provide a `schema` attribute, that schema will be used for validation, but the document must validate against the collection's schema, too.
+Generates a document and inserts it on the client. You must provide a `model` attribute referencing the `SmartModel` instance. The model has an attached schema, it will be used for validation. If you provide a `schema` attribute, that schema will be used for validation, but the document must validate against the model's schema, too.
 
 ### update
 
-Updates a document on the client. You must provide a `collection` attribute referencing the `Mongo.Collection` instance. If the collection has an attached schema, it will be used for validation. If you provide a `schema` attribute, that schema will be used for validation, but the document must validate against the collection's schema, too.
+Updates a document on the client. You must provide a `model` attribute referencing the `SmartModel` instance. The model has an attached schema, it will be used for validation. If you provide a `schema` attribute, that schema will be used for validation, but the document must validate against the model's schema, too.
 
 The form will generate and validate an update modifier. You must specify a `doc` attribute referencing the current document, which must have an `_id` property. Any properties present in `doc` will be used as the default values in the form fields.
 
 ### update-pushArray
 
-Updates a document on the client by adding the form document to an array within the larger document. You must provide a `collection` attribute referencing the `Mongo.Collection` instance. If the collection has an attached schema, it will be modified to be scoped appropriately and that new schema will be used for validation. If you provide a `schema` attribute, that schema will be used for validation, but the document must validate against the collection's schema, too.
+Updates a document on the client by adding the form document to an array within the larger document. You must provide a `model` attribute referencing the `SmartModel` instance. The model has an attached schema, it will be modified to be scoped appropriately and that new schema will be used for validation. If you provide a `schema` attribute, that schema will be used for validation, but the document must validate against the model's schema, too.
 
 You can think of this as an insert form for subdocuments. It generates and validates a document instead of a modifier, pretending that the array item schema is the full schema. Then it performs an update operation that does a `$push` of that document into the array.
 
@@ -766,7 +761,7 @@ to calling `this.event.preventDefault()` and `this.event.stopPropagation()`. If 
 
 If you use `autoValue` or `defaultValue` options, be aware that `insertDoc` and
 `updateDoc` will not yet have auto or default values added to them. If you're
-passing them to `insert` or `update` on a Mongo.Collection with a schema, then
+passing them to `insert` or `update` on a `SmartModel` with a schema, then
 there's nothing to worry about. But if you're doing something else with the
 object on the client, then you might want to call `clean` to add the auto and
 default values:
@@ -798,11 +793,11 @@ All inputs will be read-only. Nothing happens when submitting.
 
 ## Public API
 
-For the full public API available on the `AutoForm` object, refer to the [API documentation](https://github.com/aldeed/meteor-autoform/blob/master/api.md).
+For the full public API available on the `AutoForm` object, refer to the [API documentation](https://github.com/tamino-martinius/meteor-smart-form/blob/master/api.md).
 
-## Non-Collection Forms
+## Non-Model Forms
 
-If you want to use an AutoForm for a form that does not relate to a collection
+If you want to use an AutoForm for a form that does not relate to a model
 (like a simple contact form that sends an e-mail), or for a form that relates
 to a collection that is schemaless (for example, Meteor.users()), you can do that.
 
@@ -975,10 +970,10 @@ use "before", "formToDoc", or "formToModifier" hooks to do this.
 ### Getting Current Field Values
 
 You can get the current values of all fields on a form at any time by passing the form `id`
-to [AutoForm.getFormValues](https://github.com/aldeed/meteor-autoform/blob/master/api.md#autoformgetformvaluesformidclient). This method is *not* reactive. The form must be
+to [AutoForm.getFormValues](https://github.com/tamino-martinius/meteor-smart-form/blob/master/api.md#autoformgetformvaluesformidclient). This method is *not* reactive. The form must be
 currently rendered for this to work.
 
-You can get the current value of a specific field on a specific form by passing the field name to [AutoForm.getFieldValue](https://github.com/aldeed/meteor-autoform/blob/master/api.md#autoformgetformvaluesformidclient). This method *is* reactive so it can be used in place of the built-in `afFieldValueIs` helper to show pieces of a form based on
+You can get the current value of a specific field on a specific form by passing the field name to [AutoForm.getFieldValue](https://github.com/tamino-martinius/meteor-smart-form/blob/master/api.md#autoformgetformvaluesformidclient). This method *is* reactive so it can be used in place of the built-in `afFieldValueIs` helper to show pieces of a form based on
 custom criteria about the values of other fields on the form. If using outside of the autoForm, pass the `formId` as the second argument.
 
 ## Callbacks/Hooks
@@ -1080,7 +1075,7 @@ The following properties and functions are available in all submission hooks whe
 
 * `this.addStickyValidationError(key, type, [value])`: Calls `AutoForm.addStickyValidationError` for the form
 * `this.autoSaveChangedElement`: The input element that was changed to cause this form submission (if the submission was due to autosave)
-* `this.collection`: The collection attached to the form (from `collection` attribute)
+* `this.model`: The model attached to the form (from `model` attribute)
 * `this.currentDoc`: The current document attached to the form (from `doc` attribute)
 * `this.docId`: The `_id` attribute of the `doc` attached to the form, if there is one, or for an `type='insert'` form, the `_id` of the newly inserted doc, if one has been inserted.
 * `this.event`: The browser submit event
@@ -1090,9 +1085,9 @@ The following properties and functions are available in all submission hooks whe
 * `this.removeStickyValidationError(key)`: Calls `AutoForm.removeStickyValidationError` for the form
 * `this.resetForm()`: Call this if you need to reset the form
 * `this.ss`: The SimpleSchema instance used for validating the form
-* `this.ssIsOverride`: This is `true` if `this.ss` is an override schema, meaning it's coming from a `schema` attribute on the `autoForm` or `quickForm`, but there is also a `collection` attribute pointing to a collection that has its own schema attached.
+* `this.ssIsOverride`: This is `true` if `this.ss` is an override schema, meaning it's coming from a `schema` attribute on the `autoForm` or `quickForm`, but there is also a `model` attribute pointing to a model that has its own schema attached.
 * `this.template`: The `autoForm` template instance
-* `this.updateDoc`: The gathered current form values, as a mongo modifier object suitable for passing to a collection `update` call
+* `this.updateDoc`: The gathered current form values, as a mongo modifier object suitable for passing to a model `update` call
 * `this.validationContext`: The validation context used for the form. You can use this to check or add (non-sticky) invalid keys.
 
 Notes:
@@ -1414,19 +1409,19 @@ It's possible to use template helpers instead of `valueIn` and `contextAdjust`, 
 
 There is nothing overly special about the HTML template you define. Check out the properties of `this` within the template to get all of the information you need to render your control. Primarily you need to use `this.value` to set the control's value and the provided attributes in `this.atts` should be passed along to one or more of the elements you generate. In particular, you must make sure that the `data-schema-key` attribute in `this.atts` is added to one of the generated elements, the one that you want to be provided as `this` in your `valueOut` function.
 
-For more examples, see the built-in input types [here](https://github.com/aldeed/meteor-autoform/tree/master/inputTypes).
+For more examples, see the built-in input types [here](https://github.com/tamino-martinius/meteor-smart-form/tree/master/inputTypes).
 
 ## Common Questions
 
-### Should the value of `schema` and `collection` have quotation marks around it?
+### Should the value of `schema` and `model` have quotation marks around it?
 
 It depends. If you use quotation marks, then you are telling the autoform to
 "look for an object in the `window` scope with this name". So if you define
-your collections at the top level of your client files and without the `var`
+your models at the top level of your client files and without the `var`
 keyword, then you can use this trick to avoid writing helpers.
 
 If you don't use quotation marks, then you must define a helper function with
-that name and have it return the SimpleSchema or Mongo.Collection instance.
+that name and have it return the SimpleSchema or SmartModel instance.
 
 Probably the best technique for organizing your form schemas and making them
 available as helpers is to add all SimpleSchema instances to a `Schemas` object
@@ -1483,9 +1478,9 @@ this order:
 
 1. If there is something you can change or fix about the form's schema that
 will cause the `quickForm` to render correctly, change it. If the form is for
-a collection, you can also try using a different schema (a subset, perhaps with
+a model, you can also try using a different schema (a subset, perhaps with
 stricter rules) to render the form by supplying the `schema` attribute in
-addition to the `collection`.
+addition to the `model`.
 2. If many of your forms need the same change, try writing and using a
 custom template for those forms if possible.
 3. Switch to using an `autoForm` with `afQuickField`s. You can then set
@@ -1624,8 +1619,8 @@ Template.myFormTemplate.helpers({
 {{> afQuickField name="favoriteColor" options=colorOptions}}
 ```
 
-This example provides a reactive list of colors options read from the `Colors` collection. This assumes
-that you've created and populated the `Colors` collection and published the necessary colors (documents)
+This example provides a reactive list of colors options read from the `Colors` model. This assumes
+that you've created and populated the `Colors` model and published the necessary colors (documents)
 to the client. Although using a UI helper is ideal because it is reactive, it can't be done with a `quickForm`
 or `afObjectField` or `afArrayField`, unless you make a custom template.
 
@@ -1650,8 +1645,10 @@ no errors, make sure the button's type is `submit`.
 
 ## Contributing
 
+Thanks to [aldeed](https://github.com/aldeed/) for the AutoForm package!
+
+[![Support aldeed via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/aldeed/)
+
 Anyone is welcome to contribute. Fork, make your changes, and then submit a pull request.
 
-Thanks to [all those who have contributed code changes](https://github.com/aldeed/meteor-autoform/graphs/contributors) and all who have helped by submitting bug reports and feature ideas.
-
-[![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/aldeed/)
+Thanks to [all those who have contributed code changes](https://github.com/tamino-martinius/meteor-smart-form/graphs/contributors) and all who have helped by submitting bug reports and feature ideas.
