@@ -20,16 +20,19 @@ AutoForm.addFormType('update-pushArray', {
     }
 
     // Run "before.update" hooks
-    this.runBeforeHooks(this.insertDoc, function (doc) {
-      if (_.isEmpty(doc)) { // make sure this check stays after the before hooks
+    this.runBeforeHooks(this.insertDoc, function (arrElem) {
+      if (_.isEmpty(arrElem)) { // make sure this check stays after the before hooks
         // Nothing to update. Just treat it as a successful update.
         c.result(null, 0);
       } else {
-        var modifier = {$push: {}};
-        modifier.$push[scope] = doc;
         // Perform update
+        // Not as performant as $push but should work right now
         const doc = model.find({_id: c.docId});
-        doc.update(modifier)
+        if (!_.isArray(doc[scope])) {
+          doc[scope] = [];
+        }
+        doc[scope].push(arrElem);
+        doc.save()
         .then(doc => c.result(null, doc.id))
         .catch(doc => c.result(doc.errors));
       }
