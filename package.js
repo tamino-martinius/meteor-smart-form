@@ -1,22 +1,22 @@
 Package.describe({
-  name: "aldeed:autoform",
+  name: "zaku:smart-form",
   summary: "Easily create forms with automatic insert and update, and automatic reactive validation.",
-  git: "https://github.com/aldeed/meteor-autoform.git",
-  version: "5.8.1"
+  git: "https://github.com/zaku/meteor-smart-form.git",
+  version: "1.0.0"
 });
 
 Package.onUse(function(api) {
   // Dependencies
-  api.versionsFrom(['METEOR@0.9.3', 'METEOR@0.9.4', 'METEOR@1.0']);
+  api.versionsFrom('METEOR@1.2.1');
   // common
-  api.use('aldeed:simple-schema@1.1.0');
+  api.use('aldeed:simple-schema@1.5.3');
   api.use('check');
   // client
-  api.use(['livedata', 'underscore', 'deps', 'templating', 'ui', 'blaze', 'ejson', 'reactive-var', 'reactive-dict', 'random', 'jquery'], 'client');
+  api.use(['ecmascript', 'livedata', 'underscore', 'deps', 'templating', 'ui', 'blaze', 'ejson', 'reactive-var', 'reactive-dict', 'random', 'jquery'], 'client');
   api.use('momentjs:moment@2.10.6', 'client');
   api.use('mrt:moment-timezone@0.2.1', 'client', {weak: true});
   api.use('aldeed:moment-timezone@0.4.0', 'client', {weak: true});
-  api.use(['aldeed:collection2@2.0.0', 'reload'], 'client', {weak: true});
+  api.use(['zaku:smart-record@0.1.0', 'reload'], 'client', {weak: true});
 
   // Imply SS to make sure SimpleSchema object is available to app
   api.imply('aldeed:simple-schema');
@@ -225,7 +225,7 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function (api) {
-  api.use(['aldeed:autoform', 'tinytest', 'underscore', 'mongo']);
+  api.use(['zaku:smart-form', 'tinytest', 'underscore', 'mongo']);
   api.use('momentjs:moment', 'client');
   api.addFiles(['tests/utility-tests.js', 'tests/autoform-tests.js']);
 });

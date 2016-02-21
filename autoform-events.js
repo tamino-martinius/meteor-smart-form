@@ -90,10 +90,10 @@ Template.autoForm.events({
     var form = AutoForm.getCurrentDataForForm(formId);
     var formType = form.type;
     // ss will be the schema for the `schema` attribute if present,
-    // else the schema for the collection
+    // else the schema for the model
     var ss = AutoForm.getFormSchema(formId);
-    var collection = AutoForm.getFormCollection(formId);
-    var ssIsOverride = !!(collection && form.schema);
+    var model = AutoForm.getFormModel(formId);
+    var ssIsOverride = !!(model && form.schema);
 
     var currentDoc = form.doc;
     var docId = currentDoc ? currentDoc._id : null;
@@ -128,7 +128,7 @@ Template.autoForm.events({
         AutoForm.addStickyValidationError(formId, key, type, value);
       },
       autoSaveChangedElement: lastAutoSaveElement,
-      collection: collection,
+      model: model,
       currentDoc: currentDoc,
       docId: docId,
       event: event,

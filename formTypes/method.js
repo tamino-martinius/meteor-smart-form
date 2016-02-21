@@ -38,16 +38,16 @@ AutoForm.addFormType('method', {
     // Get SimpleSchema
     var ss = AutoForm.getFormSchema(this.form.id);
 
-    var collection = AutoForm.getFormCollection(this.form.id);
+    var model = AutoForm.getFormModel(this.form.id);
     // If there is a `schema` attribute but you want to force validation against the
     // collection's schema instead, pass useCollectionSchema=true
-    ss = (this.useCollectionSchema && collection) ? collection.simpleSchema() : ss;
+    ss = (this.useCollectionSchema && model) ? model.simpleSchema() : ss;
 
     // Validate
     return AutoForm._validateFormDoc(this.formDoc, false, this.form.id, ss, this.form);
   },
   shouldPrevalidate: function () {
     // Prevalidate only if there is both a `schema` attribute and a `collection` attribute
-    return !!this.formAttributes.collection && !!this.formAttributes.schema;
+    return true;
   }
 });

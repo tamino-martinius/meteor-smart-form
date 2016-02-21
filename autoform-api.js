@@ -1053,16 +1053,16 @@ AutoForm.getCurrentDataPlusExtrasForForm = function (formId) {
 };
 
 /**
- * @method AutoForm.getFormCollection
+ * @method AutoForm.getFormModel
  * @public
  * @param {String} formId The form's `id` attribute
  * @returns {Mongo.Collection|undefined} The Collection instance
  *
  * Gets the collection for a form from the `collection` attribute
  */
-AutoForm.getFormCollection = function (formId) {
+AutoForm.getFormModel = function (formId) {
   var data = AutoForm.getCurrentDataForForm(formId);
-  return AutoForm.Utility.lookup(data.collection);
+  return AutoForm.Utility.lookup(data.model);
 };
 
 /**
@@ -1247,9 +1247,9 @@ setDefaults = function setDefaults(data) {
     if (schema) {
       schema = AutoForm.Utility.lookup(schema);
     } else {
-      var collection = AutoForm.Utility.lookup(data.collection);
-      if (collection && typeof collection.simpleSchema === 'function') {
-        schema = collection.simpleSchema();
+      var model = AutoForm.Utility.lookup(data.model);
+      if (model && typeof model.simpleSchema === 'function') {
+        schema = model.simpleSchema();
       }
     }
 

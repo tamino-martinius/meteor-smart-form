@@ -8,9 +8,9 @@ AutoForm.addFormType('update-pushArray', {
     this.event.preventDefault();
 
     // Make sure we have a collection
-    var collection = this.collection;
-    if (!collection) {
-      throw new Error("AutoForm: You must specify a collection when form type is update-pushArray.");
+    var model = this.model;
+    if (!model) {
+      throw new Error("AutoForm: You must specify a model when form type is update-pushArray.");
     }
 
     // Make sure we have a scope
@@ -20,15 +20,21 @@ AutoForm.addFormType('update-pushArray', {
     }
 
     // Run "before.update" hooks
-    this.runBeforeHooks(this.insertDoc, function (doc) {
-      if (_.isEmpty(doc)) { // make sure this check stays after the before hooks
+    this.runBeforeHooks(this.insertDoc, function (arrElem) {
+      if (_.isEmpty(arrElem)) { // make sure this check stays after the before hooks
         // Nothing to update. Just treat it as a successful update.
         c.result(null, 0);
       } else {
-        var modifer = {$push: {}};
-        modifer.$push[scope] = doc;
         // Perform update
-        collection.update({_id: c.docId}, modifer, c.validationOptions, c.result);
+        // Not as performant as $push but should work right now
+        const doc = model.find({_id: c.docId});
+        if (!_.isArray(doc[scope])) {
+          doc[scope] = [];
+        }
+        doc[scope].push(arrElem);
+        doc.save()
+        .then(doc => c.result(null, doc.id))
+        .catch(doc => c.result(doc.errors));
       }
     });
   },

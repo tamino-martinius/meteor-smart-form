@@ -151,12 +151,20 @@ Utility = {
    * name on the `window` object. Otherwise returns `obj`.
    */
   lookup: function lookup(obj) {
-    var ref = window, arr;
+    let ref = window;
     if (typeof obj === "string") {
-      arr = obj.split(".");
-      while(arr.length && (ref = ref[arr.shift()]));
-      if (!ref) {
-        throw new Error(obj + " is not in the window scope");
+      const arr = obj.split(".");
+      for (const elem of arr) {
+        if (elem.endsWith('()')) {
+          const fnName = elem.substr(0, elem.length - 2);
+          ref = ref[fnName];
+          if (!ref) { throw new Error(obj + " is not in the window scope"); }
+          if (_.isFunction(ref)) { throw new Error(obj + " is not in the window scope"); }
+          ref = ref();
+        } else {
+          ref = ref[elem];
+          if (!ref) { throw new Error(obj + " is not in the window scope"); }
+        }
       }
       return ref;
     }

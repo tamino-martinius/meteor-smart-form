@@ -7,28 +7,18 @@ AutoForm.addFormType('insert', {
     // Prevent browser form submission
     this.event.preventDefault();
 
-    // Make sure we have a collection
-    var collection = this.collection;
-    if (!collection) {
-      throw new Error("AutoForm: You must specify a collection when form type is insert.");
+    // Make sure we have a model
+    var model = this.model;
+    if (!model) {
+      throw new Error("AutoForm: You must specify a model when form type is insert.");
     }
-
-    // See if the collection has a schema attached
-    var collectionHasSchema = (typeof collection.simpleSchema === "function" &&
-                               collection.simpleSchema() != null);
 
     // Run "before.insert" hooks
     this.runBeforeHooks(this.insertDoc, function (doc) {
       // Perform insert
-      if (collectionHasSchema) {
-        // If the collection2 pkg is used and a schema is attached, we pass a validationContext
-        collection.insert(doc, c.validationOptions, c.result);
-      } else {
-        // If the collection2 pkg is not used or no schema is attached, we don't pass options
-        // because core Meteor's `insert` function does not accept
-        // an options argument.
-        collection.insert(doc, c.result);
-      }
+      model.create(doc)
+      .then(doc => c.result(null, doc.id))
+      .catch(doc => c.result(doc.errors));
     });
   },
   validateForm: function () {
@@ -38,7 +28,7 @@ AutoForm.addFormType('insert', {
     return AutoForm._validateFormDoc(this.formDoc, false, this.form.id, ss, this.form);
   },
   shouldPrevalidate: function () {
-    // Prevalidate only if there is both a `schema` attribute and a `collection` attribute
-    return !!this.formAttributes.collection && !!this.formAttributes.schema;
+    // Prevalidate only if there is both a `schema` attribute and a `model` attribute
+    return true;
   }
 });
