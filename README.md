@@ -91,103 +91,105 @@ $ meteor add zaku:smart-form
 
 ### Community Add-On Packages
 
+*The struck out packages are not yet testet!*
+
 *Submit a pull request to add your package to this list!*
 
 #### Custom Input Types
 
 Dates and times:
 
-* [aldeed:autoform-bs-datepicker](https://atmospherejs.com/aldeed/autoform-bs-datepicker)
-* [aldeed:autoform-bs-datetimepicker](https://atmospherejs.com/aldeed/autoform-bs-datetimepicker)
-* [miguelalarcos:afwrap-xdatetime](https://atmospherejs.com/miguelalarcos/afwrap-xdatetime)
-* [notorii:autoform-datetimepicker](https://atmospherejs.com/notorii/autoform-datetimepicker)
-* [lukemadera:autoform-pikaday](https://atmospherejs.com/lukemadera/autoform-pikaday)
-* [antalakas:autoform-bs-daterangepicker](https://atmospherejs.com/antalakas/autoform-bs-daterangepicker)
-* [drewy:autoform-datetimepicker](https://atmospherejs.com/drewy/autoform-datetimepicker)
-* [bookmd:autoform-time-from-now](https://atmospherejs.com/bookmd/autoform-time-from-now)
+* ~~[aldeed:autoform-bs-datepicker](https://atmospherejs.com/aldeed/autoform-bs-datepicker)~~
+* ~~[aldeed:autoform-bs-datetimepicker](https://atmospherejs.com/aldeed/autoform-bs-datetimepicker)~~
+* ~~[miguelalarcos:afwrap-xdatetime](https://atmospherejs.com/miguelalarcos/afwrap-xdatetime)~~
+* ~~[notorii:autoform-datetimepicker](https://atmospherejs.com/notorii/autoform-datetimepicker)~~
+* ~~[lukemadera:autoform-pikaday](https://atmospherejs.com/lukemadera/autoform-pikaday)~~
+* ~~[antalakas:autoform-bs-daterangepicker](https://atmospherejs.com/antalakas/autoform-bs-daterangepicker)~~
+* ~~[drewy:autoform-datetimepicker](https://atmospherejs.com/drewy/autoform-datetimepicker)~~
+* ~~[bookmd:autoform-time-from-now](https://atmospherejs.com/bookmd/autoform-time-from-now)~~
 
 Selects:
 
-* [aldeed:autoform-select2](https://atmospherejs.com/aldeed/autoform-select2)
-* [aldeed:autoform-bs-button-group-input](https://atmospherejs.com/aldeed/autoform-bs-button-group-input)
-* [comerc:autoform-selectize](https://atmospherejs.com/comerc/autoform-selectize)
-* [vazco:universe-autoform-select](https://atmospherejs.com/vazco/universe-autoform-select)
-* [lukemadera:autoform-autocomplete](https://atmospherejs.com/lukemadera/autoform-autocomplete)
-* [rikonor:autoform-image-gallery](https://github.com/rikonor/meteor-autoform-image-gallery)
+* ~~[aldeed:autoform-select2](https://atmospherejs.com/aldeed/autoform-select2)~~
+* ~~[aldeed:autoform-bs-button-group-input](https://atmospherejs.com/aldeed/autoform-bs-button-group-input)~~
+* ~~[comerc:autoform-selectize](https://atmospherejs.com/comerc/autoform-selectize)~~
+* ~~[vazco:universe-autoform-select](https://atmospherejs.com/vazco/universe-autoform-select)~~
+* ~~[lukemadera:autoform-autocomplete](https://atmospherejs.com/lukemadera/autoform-autocomplete)~~
+* ~~[rikonor:autoform-image-gallery](https://github.com/rikonor/meteor-autoform-image-gallery)~~
 
 WYSIWYGs:
 
-* [mpowaga:autoform-summernote](https://atmospherejs.com/mpowaga/autoform-summernote)
-* [donchess:autoform-froala](https://atmospherejs.com/donchess/autoform-froala)
-* [vimes1984:autoform-textangular](https://atmospherejs.com/vimes1984/autoform-textangular)
+* ~~[mpowaga:autoform-summernote](https://atmospherejs.com/mpowaga/autoform-summernote)~~
+* ~~[donchess:autoform-froala](https://atmospherejs.com/donchess/autoform-froala)~~
+* ~~[vimes1984:autoform-textangular](https://atmospherejs.com/vimes1984/autoform-textangular)~~
 
 Markdowns:
 
-* [q42:autoform-markdown](https://atmospherejs.com/q42/autoform-markdown)
+* ~~[q42:autoform-markdown](https://atmospherejs.com/q42/autoform-markdown)~~
 
 Autocompletes:
 
-* [comerc:autoform-placecomplete](https://atmospherejs.com/comerc/autoform-placecomplete)
-* [miguelalarcos:afwrap-xautocomplete](https://atmospherejs.com/miguelalarcos/afwrap-xautocomplete)
-* [comerc:autoform-typeahead](https://atmospherejs.com/comerc/autoform-typeahead)
-* [lukemadera:autoform-googleplace](https://atmospherejs.com/lukemadera/autoform-googleplace)
-* [lukemadera:autoform-autocomplete](https://atmospherejs.com/lukemadera/autoform-autocomplete)
+* ~~[comerc:autoform-placecomplete](https://atmospherejs.com/comerc/autoform-placecomplete)~~
+* ~~[miguelalarcos:afwrap-xautocomplete](https://atmospherejs.com/miguelalarcos/afwrap-xautocomplete)~~
+* ~~[comerc:autoform-typeahead](https://atmospherejs.com/comerc/autoform-typeahead)~~
+* ~~[lukemadera:autoform-googleplace](https://atmospherejs.com/lukemadera/autoform-googleplace)~~
+* ~~[lukemadera:autoform-autocomplete](https://atmospherejs.com/lukemadera/autoform-autocomplete)~~
 
 Files:
 
-* [cfs:autoform](https://atmospherejs.com/cfs/autoform)
-* [yogiben:autoform-file](https://atmospherejs.com/yogiben/autoform-file)
-* [naxio:autoform-file](https://atmospherejs.com/naxio/autoform-file)
-* [elevatedevdesign:autoform-slingshot](https://github.com/ElevateDev/meteor-autoform-slingshot)
+* ~~[cfs:autoform](https://atmospherejs.com/cfs/autoform)~~
+* ~~[yogiben:autoform-file](https://atmospherejs.com/yogiben/autoform-file)~~
+* ~~[naxio:autoform-file](https://atmospherejs.com/naxio/autoform-file)~~
+* ~~[elevatedevdesign:autoform-slingshot](https://github.com/ElevateDev/meteor-autoform-slingshot)~~
 
 Maps:
 
-* [yogiben:autoform-map](https://atmospherejs.com/yogiben/autoform-map)
+* ~~[yogiben:autoform-map](https://atmospherejs.com/yogiben/autoform-map)~~
 
 Ranges/Sliders:
 
-* [elevatedevdesign:autoform-nouislider](https://github.com/ElevateDev/meteor-autoform-nouislider)
+* ~~[elevatedevdesign:autoform-nouislider](https://github.com/ElevateDev/meteor-autoform-nouislider)~~
 
 Payments
 
-* [elevatedevdesign:autoform-jquery-payments](https://github.com/ElevateDev/meteor-autoform-jquery-payments)
+* ~~[elevatedevdesign:autoform-jquery-payments](https://github.com/ElevateDev/meteor-autoform-jquery-payments)~~
 
 Other:
 
-* [aldeed:delete-button](https://github.com/aldeed/meteor-delete-button)
-* [comerc:autoform-contenteditable2](https://atmospherejs.com/comerc/autoform-contenteditable2)
-* [hausor:autoform-bs-minicolors](https://atmospherejs.com/hausor/autoform-bs-minicolors)
+* [zaku:smart-form-delete-button](https://github.com/tamino-martinius/meteor-smart-form-delete-button)
+* ~~[comerc:autoform-contenteditable2](https://atmospherejs.com/comerc/autoform-contenteditable2)~~
+* ~~[hausor:autoform-bs-minicolors](https://atmospherejs.com/hausor/autoform-bs-minicolors)~~
 
 #### Themes
 
-* [meteoric:autoform-ionic](https://github.com/meteoric/autoform-ionic)
-* [fabienb4:autoform-semantic-ui](https://atmospherejs.com/fabienb4/autoform-semantic-ui)
-* [gildaspk:autoform-materialize](https://atmospherejs.com/gildaspk/autoform-materialize)
-* [poetic:react-autoform-material-ui](https://atmospherejs.com/poetic/react-autoform-material-ui)
+* ~~[meteoric:autoform-ionic](https://github.com/meteoric/autoform-ionic)~~
+* ~~[fabienb4:autoform-semantic-ui](https://atmospherejs.com/fabienb4/autoform-semantic-ui)~~
+* ~~[gildaspk:autoform-materialize](https://atmospherejs.com/gildaspk/autoform-materialize)~~
+* ~~[poetic:react-autoform-material-ui](https://atmospherejs.com/poetic/react-autoform-material-ui)~~
 
 #### Admin Panels
 
-* [yogiben:admin](https://atmospherejs.com/yogiben/admin)
-* [kaoskeya:admin](https://atmospherejs.com/kaoskeya/admin)
-* [vimes1984:foundation-angular-admin](https://atmospherejs.com/vimes1984/foundation-angular-admin)
-* [tooit:content-types](https://github.com/tooit/meteor-content-types)
+* ~~[yogiben:admin](https://atmospherejs.com/yogiben/admin)~~
+* ~~[kaoskeya:admin](https://atmospherejs.com/kaoskeya/admin)~~
+* ~~[vimes1984:foundation-angular-admin](https://atmospherejs.com/vimes1984/foundation-angular-admin)~~
+* ~~[tooit:content-types](https://github.com/tooit/meteor-content-types)~~
 
 #### Content Management Systems
 
-* [orionjs:core](https://atmospherejs.com/orionjs)
+* ~~[orionjs:core](https://atmospherejs.com/orionjs)~~
 
 #### Components
 
-* [comerc:autoform-bs-more](https://atmospherejs.com/comerc/autoform-bs-more)
-* [forwarder:autoform-wizard](https://atmospherejs.com/forwarder/autoform-wizard)
-* [planifica:wizard](https://atmospherejs.com/planifica/wizard)
-* [yogiben:autoform-modals](https://atmospherejs.com/yogiben/autoform-modals)
+* ~~[comerc:autoform-bs-more](https://atmospherejs.com/comerc/autoform-bs-more)~~
+* ~~[forwarder:autoform-wizard](https://atmospherejs.com/forwarder/autoform-wizard)~~
+* ~~[planifica:wizard](https://atmospherejs.com/planifica/wizard)~~
+* ~~[yogiben:autoform-modals](https://atmospherejs.com/yogiben/autoform-modals)~~
 
 #### Other
 
-* [comerc:autoform-fixtures](https://github.com/comerc/meteor-autoform-fixtures/)
-* [tooit:content-types](https://atmospherejs.com/tooit/content-types)
-* [tooit:content-types-bootstrap3](https://atmospherejs.com/tooit/content-types-bootstrap3)
+* ~~[comerc:autoform-fixtures](https://github.com/comerc/meteor-autoform-fixtures/)~~
+* ~~[tooit:content-types](https://atmospherejs.com/tooit/content-types)~~
+* ~~[tooit:content-types-bootstrap3](https://atmospherejs.com/tooit/content-types-bootstrap3)~~
 
 ## Demo
 
