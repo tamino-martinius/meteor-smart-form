@@ -193,7 +193,7 @@ Other:
 
 ## Demo
 
-[Live](http://smartform.meteor.com)
+[Live](https://smart-form-demo.herokuapp.com)
 
 [Source](https://github.com/tamino-martinius/meteor-smart-record)
 
@@ -413,7 +413,7 @@ fields listed here (and their subfields, if any) will be included.
 
 Any other attributes you specify will be output as attributes of the `<form>` element, just like when using the `autoForm` component. When providing a boolean attribute, set it to `true` (no quotation marks) or a helper that returns `true`.
 
-See [this demo](http://smartform.meteor.com/qfdetails) for examples of what happens when you specify various types of fields in the `fields` or `omitFields` attributes.
+See [this demo](https://smart-form-demo.herokuapp.com/qfdetails) for examples of what happens when you specify various types of fields in the `fields` or `omitFields` attributes.
 
 ### afFieldInput
 
@@ -525,7 +525,7 @@ Template.registerHelper("yearOptions", function() {
 });
 ```
 
-You can also mix in optgroups. See [the demo](http://smartform.meteor.com/select).
+You can also mix in optgroups. See [the demo](https://smart-form-demo.herokuapp.com/select).
 
 ### afFieldMessage
 
@@ -585,7 +585,7 @@ Refer to the "Objects and Arrays" section for additional information.
 
 Use this helper with `#if` to dynamically show and hide sections of a form based on the current value of any non-array field on the form.
 
-See [the demo](http://smartform.meteor.com/fieldvalues)
+See [the demo](https://smart-form-demo.herokuapp.com/fieldvalues)
 
 ### afFieldNames
 
